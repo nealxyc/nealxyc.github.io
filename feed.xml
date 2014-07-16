@@ -5,14 +5,28 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 15 Jul 2014 15:35:43 -0700</pubDate>
-    <lastBuildDate>Tue, 15 Jul 2014 15:35:43 -0700</lastBuildDate>
+    <pubDate>Tue, 15 Jul 2014 17:19:31 -0700</pubDate>
+    <lastBuildDate>Tue, 15 Jul 2014 17:19:31 -0700</lastBuildDate>
     <generator>Jekyll v2.1.0</generator>
+    
+      <item>
+        <title>A Trie Implementation In Python</title>
+        <description>&lt;script src=&quot;https://gist.github.com/nealxyc/ff024b74e96d3a141387.js&quot;&gt; &lt;/script&gt;
+</description>
+        <pubDate>Tue, 15 Jul 2014 00:00:00 -0700</pubDate>
+        <link>/2014/07/15/a-trie-implementation-in-python/</link>
+        <guid isPermaLink="true">/2014/07/15/a-trie-implementation-in-python/</guid>
+        
+        <category>java</category>
+        
+        <category>maven</category>
+        
+        
+      </item>
     
       <item>
         <title>How To Use A Github Reposiroty As Maven Repository</title>
         <description>&lt;script src=&quot;https://gist.github.com/nealxyc/96267110f5156ac2ab12.js&quot;&gt; &lt;/script&gt;
-
 </description>
         <pubDate>Sun, 06 Jul 2014 00:00:00 -0700</pubDate>
         <link>/2014/07/06/how-to-use-a-github-reposiroty-as-maven-repository/</link>
