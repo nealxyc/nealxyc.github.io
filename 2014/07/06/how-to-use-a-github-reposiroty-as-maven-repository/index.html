@@ -11,6 +11,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/kramdown-highlight.css">
 
 </head>
 
@@ -62,10 +63,93 @@
   </header>
 
   <article class="post-content">
-  <script src="https://gist.github.com/nealxyc/96267110f5156ac2ab12.js"> </script>
+  <h3 id="create-a-dedicated-project-to-host-your-maven-repository-on-github">1. Create a dedicated project to host your Maven repository on Github</h3>
+<p>For example, you can have a <code>mvn-repo</code> project created.</p>
+
+<h3 id="clone-the-remote-mvn-repo-into-your-local-folder">2. Clone the remote <code>mvn-repo</code> into your local folder</h3>
+<p>For example, into <code>~/workspace/mvn-repo</code> folder</p>
+
+<h3 id="build-your-project-and-deploy-it-into-your-local-folder">3. Build your project and deploy it into your local folder.</h3>
+<p>In order to do this, you will need to have the following snippet in your <code>pom.xml</code> file</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span style="color:#070;font-weight:bold">&lt;distributionManagement&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;repository&gt;</span>
+                        <span style="color:#070;font-weight:bold">&lt;id&gt;</span>internal.repo<span style="color:#070;font-weight:bold">&lt;/id&gt;</span>
+                        <span style="color:#070;font-weight:bold">&lt;name&gt;</span>Github Repo<span style="color:#070;font-weight:bold">&lt;/name&gt;</span>
+                        <span style="color:#070;font-weight:bold">&lt;url&gt;</span>file:///path/to/mvn-repo<span style="color:#070;font-weight:bold">&lt;/url&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;/repository&gt;</span>
+<span style="color:#070;font-weight:bold">&lt;/distributionManagement&gt;</span>
+
+<span style="color:#070;font-weight:bold">&lt;plugins&gt;</span>
+  <span style="color:#070;font-weight:bold">&lt;plugin&gt;</span>
+      <span style="color:#070;font-weight:bold">&lt;artifactId&gt;</span>maven-deploy-plugin<span style="color:#070;font-weight:bold">&lt;/artifactId&gt;</span>
+      <span style="color:#070;font-weight:bold">&lt;version&gt;</span>2.8.1<span style="color:#070;font-weight:bold">&lt;/version&gt;</span>
+      <span style="color:#070;font-weight:bold">&lt;configuration&gt;</span>
+          <span style="color:#070;font-weight:bold">&lt;altDeploymentRepository&gt;</span>internal.repo::default::file:///path/to/mvn-repo<span style="color:#070;font-weight:bold">&lt;/altDeploymentRepository&gt;</span>
+      <span style="color:#070;font-weight:bold">&lt;/configuration&gt;</span>
+  <span style="color:#070;font-weight:bold">&lt;/plugin&gt;</span>
+<span style="color:#070;font-weight:bold">&lt;/plugins&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>If you already have a <code>&lt;distributionManagement&gt;</code> tag in you <code>pom.xml</code> file, you might want to comment that out for the moment.</p>
+
+<h3 id="use-maven-to-build-and-deploy-your-project">4. Use Maven to build and deploy your project</h3>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>mvn clean deploy
+</pre></div>
+</div>
+</div>
+
+<h3 id="now-you-just-need-to-commit-and-push-your-changes-in-project-mvn-repo">5. Now you just need to commit and push your changes in project <code>mvn-repo</code></h3>
+
+<div><div class="CodeRay">
+  <div class="code"><pre>git commit -m &quot;Added org.openjdk.jmh&quot;
+git push
+</pre></div>
+</div>
+</div>
+
+<h3 id="in-you-other-projects-you-can-reference-to-your-own-maven-repo">6. In you other projects, you can reference to your own Maven repo</h3>
+<div><div class="CodeRay">
+  <div class="code"><pre><span style="color:#070;font-weight:bold">&lt;repositories&gt;</span>
+        <span style="color:#070;font-weight:bold">&lt;repository&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;id&gt;</span>nealxyc-github-repo<span style="color:#070;font-weight:bold">&lt;/id&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;url&gt;</span>https://raw.githubusercontent.com/nealxyc/mvn-repo/master/<span style="color:#070;font-weight:bold">&lt;/url&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;releases&gt;</span>
+                    <span style="color:#070;font-weight:bold">&lt;enabled&gt;</span>true<span style="color:#070;font-weight:bold">&lt;/enabled&gt;</span>
+                    <span style="color:#070;font-weight:bold">&lt;updatePolicy&gt;</span>daily<span style="color:#070;font-weight:bold">&lt;/updatePolicy&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;/releases&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;snapshots&gt;</span>
+                    <span style="color:#070;font-weight:bold">&lt;enabled&gt;</span>true<span style="color:#070;font-weight:bold">&lt;/enabled&gt;</span>
+                    <span style="color:#070;font-weight:bold">&lt;updatePolicy&gt;</span>always<span style="color:#070;font-weight:bold">&lt;/updatePolicy&gt;</span>
+                <span style="color:#070;font-weight:bold">&lt;/snapshots&gt;</span>
+        <span style="color:#070;font-weight:bold">&lt;/repository&gt;</span>
+<span style="color:#070;font-weight:bold">&lt;/repositories&gt;</span>
+</pre></div>
+</div>
+</div>
 
   </article>
 
+	<!-- Disqus comment form -->
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nealxyc'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
 </div>
       </div>
     </div>

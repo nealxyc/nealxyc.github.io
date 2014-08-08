@@ -5,28 +5,151 @@
     <description></description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 16 Jul 2014 00:33:20 -0700</pubDate>
-    <lastBuildDate>Wed, 16 Jul 2014 00:33:20 -0700</lastBuildDate>
+    <pubDate>Thu, 07 Aug 2014 17:23:48 -0700</pubDate>
+    <lastBuildDate>Thu, 07 Aug 2014 17:23:48 -0700</lastBuildDate>
     <generator>Jekyll v2.1.0</generator>
     
       <item>
         <title>A Trie Implementation In Python</title>
-        <description>&lt;script src=&quot;https://gist.github.com/nealxyc/ff024b74e96d3a141387.js&quot;&gt; &lt;/script&gt;
+        <description>&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;class&lt;/span&gt; &lt;span style=&quot;color:#B06;font-weight:bold&quot;&gt;Trie&lt;/span&gt;:
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__init__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;):
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.rootNode = TrieNode(&lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;)
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.size = &lt;span style=&quot;color:#00D&quot;&gt;0&lt;/span&gt;
+        &lt;span style=&quot;color:#777&quot;&gt;#self.&lt;/span&gt;
+        
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;insert&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;, word):
+        node = &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.rootNode
+        key = &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;for&lt;/span&gt; letter &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;in&lt;/span&gt; word:
+            key += letter
+            &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;if&lt;/span&gt; letter &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;in&lt;/span&gt; node.subNodes:
+                node = node[letter]
+            &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;else&lt;/span&gt;:
+                node[letter] = TrieNode(key) 
+                node = node[letter]
+                  
+        node.isKey = &lt;span style=&quot;color:#069&quot;&gt;True&lt;/span&gt;        
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.size += &lt;span style=&quot;color:#00D&quot;&gt;1&lt;/span&gt;
+    
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__repr__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;):
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;Trie&amp;lt;size={}&amp;gt;&lt;/span&gt;&lt;span style=&quot;color:#b0b&quot;&gt;\n&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;.format(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.size, &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.rootNode.__str__(&lt;span style=&quot;color:#00D&quot;&gt;0&lt;/span&gt;)) 
+    
+        
+&lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;class&lt;/span&gt; &lt;span style=&quot;color:#B06;font-weight:bold&quot;&gt;TrieNode&lt;/span&gt;:
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__init__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;, content, isKey=&lt;span style=&quot;color:#069&quot;&gt;False&lt;/span&gt;):
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.isKey = isKey
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.content = content
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.subNodes = {}
+    
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__getitem__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;, letter):
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.subNodes[letter]
+    
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__setitem__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;, letter, node):
+        &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.subNodes[letter] = node
+    
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__contains__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;, item):
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; item &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.subNodes
+    
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__repr__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;):
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;TrieNode&amp;lt;&lt;/span&gt;&lt;span style=&quot;color:#b0b&quot;&gt;\&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;{}&lt;/span&gt;&lt;span style=&quot;color:#b0b&quot;&gt;\&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;, {}&amp;gt;&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;.format(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.content, &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.subNodes.keys())
+    
+    &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;def&lt;/span&gt; &lt;span style=&quot;color:#06B;font-weight:bold&quot;&gt;__str__&lt;/span&gt;(&lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;, level=&lt;span style=&quot;color:#00D&quot;&gt;0&lt;/span&gt;):
+        ret = &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;
+        indent = &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt; * level
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.isKey:
+            ret += &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;{}  {}  {}&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;.format(indent, &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.content, &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#b0b&quot;&gt;\n&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;)
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;else&lt;/span&gt;:
+            ret += &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;{} ({}) {}&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;.format(indent, &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.content, &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#b0b&quot;&gt;\n&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;)
+
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;for&lt;/span&gt; key, value &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;in&lt;/span&gt; &lt;span style=&quot;color:#069&quot;&gt;self&lt;/span&gt;.subNodes.iteritems():
+            ret += &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt;{}-{}:{}&lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;.format(indent + &lt;span style=&quot;background-color:hsla(0,100%,50%,0.05)&quot;&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;span style=&quot;color:#D20&quot;&gt; &lt;/span&gt;&lt;span style=&quot;color:#710&quot;&gt;&#39;&lt;/span&gt;&lt;/span&gt;, key , value.__str__(level + &lt;span style=&quot;color:#00D&quot;&gt;1&lt;/span&gt;))
+        &lt;span style=&quot;color:#080;font-weight:bold&quot;&gt;return&lt;/span&gt; ret   
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Tue, 15 Jul 2014 00:00:00 -0700</pubDate>
         <link>/2014/07/15/a-trie-implementation-in-python/</link>
         <guid isPermaLink="true">/2014/07/15/a-trie-implementation-in-python/</guid>
         
-        <category>java</category>
+        <category>python</category>
         
-        <category>maven</category>
+        <category>trie</category>
         
         
       </item>
     
       <item>
         <title>How To Use A Github Reposiroty As Maven Repository</title>
-        <description>&lt;script src=&quot;https://gist.github.com/nealxyc/96267110f5156ac2ab12.js&quot;&gt; &lt;/script&gt;
+        <description>&lt;h3 id=&quot;create-a-dedicated-project-to-host-your-maven-repository-on-github&quot;&gt;1. Create a dedicated project to host your Maven repository on Github&lt;/h3&gt;
+&lt;p&gt;For example, you can have a &lt;code&gt;mvn-repo&lt;/code&gt; project created.&lt;/p&gt;
+
+&lt;h3 id=&quot;clone-the-remote-mvn-repo-into-your-local-folder&quot;&gt;2. Clone the remote &lt;code&gt;mvn-repo&lt;/code&gt; into your local folder&lt;/h3&gt;
+&lt;p&gt;For example, into &lt;code&gt;~/workspace/mvn-repo&lt;/code&gt; folder&lt;/p&gt;
+
+&lt;h3 id=&quot;build-your-project-and-deploy-it-into-your-local-folder&quot;&gt;3. Build your project and deploy it into your local folder.&lt;/h3&gt;
+&lt;p&gt;In order to do this, you will need to have the following snippet in your &lt;code&gt;pom.xml&lt;/code&gt; file&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;distributionManagement&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+                        &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;internal.repo&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+                        &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Github Repo&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+                        &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;file:///path/to/mvn-repo&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/distributionManagement&amp;gt;&lt;/span&gt;
+
+&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+  &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+      &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-deploy-plugin&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+      &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.8.1&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+      &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+          &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;altDeploymentRepository&amp;gt;&lt;/span&gt;internal.repo::default::file:///path/to/mvn-repo&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/altDeploymentRepository&amp;gt;&lt;/span&gt;
+      &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+  &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;If you already have a &lt;code&gt;&amp;lt;distributionManagement&amp;gt;&lt;/code&gt; tag in you &lt;code&gt;pom.xml&lt;/code&gt; file, you might want to comment that out for the moment.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-maven-to-build-and-deploy-your-project&quot;&gt;4. Use Maven to build and deploy your project&lt;/h3&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;mvn clean deploy
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;now-you-just-need-to-commit-and-push-your-changes-in-project-mvn-repo&quot;&gt;5. Now you just need to commit and push your changes in project &lt;code&gt;mvn-repo&lt;/code&gt;&lt;/h3&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;git commit -m &amp;quot;Added org.openjdk.jmh&amp;quot;
+git push
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;in-you-other-projects-you-can-reference-to-your-own-maven-repo&quot;&gt;6. In you other projects, you can reference to your own Maven repo&lt;/h3&gt;
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;nealxyc-github-repo&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://raw.githubusercontent.com/nealxyc/mvn-repo/master/&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;releases&amp;gt;&lt;/span&gt;
+                    &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;true&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+                    &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;updatePolicy&amp;gt;&lt;/span&gt;daily&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/updatePolicy&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/releases&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;snapshots&amp;gt;&lt;/span&gt;
+                    &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;enabled&amp;gt;&lt;/span&gt;true&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/enabled&amp;gt;&lt;/span&gt;
+                    &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;updatePolicy&amp;gt;&lt;/span&gt;always&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/updatePolicy&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/snapshots&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#070;font-weight:bold&quot;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sun, 06 Jul 2014 00:00:00 -0700</pubDate>
         <link>/2014/07/06/how-to-use-a-github-reposiroty-as-maven-repository/</link>

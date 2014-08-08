@@ -11,6 +11,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/kramdown-highlight.css">
 
 </head>
 
@@ -62,10 +63,82 @@
   </header>
 
   <article class="post-content">
-  <script src="https://gist.github.com/nealxyc/ff024b74e96d3a141387.js"> </script>
+  <div><div class="CodeRay">
+  <div class="code"><pre><span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">Trie</span>:
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__init__</span>(<span style="color:#069">self</span>):
+        <span style="color:#069">self</span>.rootNode = TrieNode(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>)
+        <span style="color:#069">self</span>.size = <span style="color:#00D">0</span>
+        <span style="color:#777">#self.</span>
+        
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">insert</span>(<span style="color:#069">self</span>, word):
+        node = <span style="color:#069">self</span>.rootNode
+        key = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#710">&quot;</span></span>
+        <span style="color:#080;font-weight:bold">for</span> letter <span style="color:#080;font-weight:bold">in</span> word:
+            key += letter
+            <span style="color:#080;font-weight:bold">if</span> letter <span style="color:#080;font-weight:bold">in</span> node.subNodes:
+                node = node[letter]
+            <span style="color:#080;font-weight:bold">else</span>:
+                node[letter] = TrieNode(key) 
+                node = node[letter]
+                  
+        node.isKey = <span style="color:#069">True</span>        
+        <span style="color:#069">self</span>.size += <span style="color:#00D">1</span>
+    
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__repr__</span>(<span style="color:#069">self</span>):
+        <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">Trie&lt;size={}&gt;</span><span style="color:#b0b">\n</span><span style="color:#D20">{}</span><span style="color:#710">&quot;</span></span>.format(<span style="color:#069">self</span>.size, <span style="color:#069">self</span>.rootNode.__str__(<span style="color:#00D">0</span>)) 
+    
+        
+<span style="color:#080;font-weight:bold">class</span> <span style="color:#B06;font-weight:bold">TrieNode</span>:
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__init__</span>(<span style="color:#069">self</span>, content, isKey=<span style="color:#069">False</span>):
+        <span style="color:#069">self</span>.isKey = isKey
+        <span style="color:#069">self</span>.content = content
+        <span style="color:#069">self</span>.subNodes = {}
+    
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__getitem__</span>(<span style="color:#069">self</span>, letter):
+        <span style="color:#080;font-weight:bold">return</span> <span style="color:#069">self</span>.subNodes[letter]
+    
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__setitem__</span>(<span style="color:#069">self</span>, letter, node):
+        <span style="color:#069">self</span>.subNodes[letter] = node
+    
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__contains__</span>(<span style="color:#069">self</span>, item):
+        <span style="color:#080;font-weight:bold">return</span> item <span style="color:#080;font-weight:bold">in</span> <span style="color:#069">self</span>.subNodes
+    
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__repr__</span>(<span style="color:#069">self</span>):
+        <span style="color:#080;font-weight:bold">return</span> <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">TrieNode&lt;</span><span style="color:#b0b">\'</span><span style="color:#D20">{}</span><span style="color:#b0b">\'</span><span style="color:#D20">, {}&gt;</span><span style="color:#710">'</span></span>.format(<span style="color:#069">self</span>.content, <span style="color:#069">self</span>.subNodes.keys())
+    
+    <span style="color:#080;font-weight:bold">def</span> <span style="color:#06B;font-weight:bold">__str__</span>(<span style="color:#069">self</span>, level=<span style="color:#00D">0</span>):
+        ret = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#710">'</span></span>
+        indent = <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"> </span><span style="color:#710">'</span></span> * level
+        <span style="color:#080;font-weight:bold">if</span> <span style="color:#069">self</span>.isKey:
+            ret += <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">{}  {}  {}</span><span style="color:#710">'</span></span>.format(indent, <span style="color:#069">self</span>.content, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#b0b">\n</span><span style="color:#710">'</span></span>)
+        <span style="color:#080;font-weight:bold">else</span>:
+            ret += <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">{} ({}) {}</span><span style="color:#710">'</span></span>.format(indent, <span style="color:#069">self</span>.content, <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#b0b">\n</span><span style="color:#710">'</span></span>)
+
+        <span style="color:#080;font-weight:bold">for</span> key, value <span style="color:#080;font-weight:bold">in</span> <span style="color:#069">self</span>.subNodes.iteritems():
+            ret += <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">{}-{}:{}</span><span style="color:#710">'</span></span>.format(indent + <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20"> </span><span style="color:#710">'</span></span>, key , value.__str__(level + <span style="color:#00D">1</span>))
+        <span style="color:#080;font-weight:bold">return</span> ret   
+</pre></div>
+</div>
+</div>
 
   </article>
 
+	<!-- Disqus comment form -->
+	<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'nealxyc'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
 </div>
       </div>
     </div>
